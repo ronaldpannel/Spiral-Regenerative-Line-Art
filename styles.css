@@ -1,20 +1,71 @@
-*{
-    padding: 0;
-    margin: o;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: o;
+  box-sizing: border-box;
 }
-body{
-   background-color: black;
+body {
+  background-color: black;
+  overflow: hidden;
+}
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 710px;
+  height: 910px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.btnContainer {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.canvas1{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 500px;
-    border: 1px solid white;
-    max-width: 100%;
-    max-height: 100%;
+.canvas1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 900px;
+  border: 1px solid white;
+  max-width: 100%;
+  max-height: 100%;
+}
+.radialBtn {
+  color: white;
+  background-color: black;
+  outline: none;
+  padding: 5px 10px;
+  border: white solid 2px;
+  border-radius: 5px;
+  box-shadow: white 1px 1px;
+  cursor: pointer;
+  margin-left: 20px;
+  z-index: 20;
+}
+.radialBtn:hover {
+  box-shadow: inset white 1px 1px;
+}
+.linearBtn {
+  color: white;
+  background-color: black;
+  outline: none;
+  padding: 5px 10px;
+  border: white solid 2px;
+  border-radius: 5px;
+  box-shadow: white 1px 1px;
+  margin-left: 20px;
+  cursor: pointer;
+  z-index: 20;
+}
+.linearBtn:hover {
+  box-shadow: inset white 1px 1px;
+}
+#patternImage {
+  display: none;
 }
