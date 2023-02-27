@@ -3,17 +3,20 @@
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
+  const ratioSlider = document.getElementById("ratioSlider");
+  const ratioLabel = document.getElementById("ratioLabel");
   canvas.width = 700;
   canvas.height = 900;
-
-  const linesArray = [];
-  const numberOfLines = 50;
+  let linesArray = [];
+  let numberOfLines = 50;
+  let  sliderValue;
 
   class Line {
     constructor(canvas) {
       this.canvas = canvas;
       this.x = Math.floor(Math.random() * canvas.width);
       this.y = Math.floor(Math.random() * canvas.height);
+      this.breakValue;
       this.history = [{ x: this.x, y: this.y }];
       this.lineWidth = Math.floor(Math.random() * 10 + 1);
       this.hue = Math.floor(Math.random() * 360);
@@ -21,9 +24,9 @@ window.addEventListener("load", function () {
       this.speedX = Math.random() * 1 - 0.5;
       this.speedY = 7;
       this.lifeSpan = this.maxLength * 3;
-      this.breakPoint = this.lifeSpan * 0.5;
+      this.breakPoint = this.lifeSpan * this.breakValue;
       this.timer = 0;
-      this.va =Math.random() * 0.5 -0.25
+      this.va = Math.random() * 0.5 - 0.25;
       this.angle = 0;
       this.curve = 30;
       this.vc = Math.random() * 0.4 - 0.2;
@@ -43,8 +46,8 @@ window.addEventListener("load", function () {
       this.angle += this.va;
       this.curve += this.vc;
       if (this.timer < this.lifeSpan) {
-        if(this.timer < this.breakPoint){
-          this.va *= -1.12
+        if (this.timer < this.breakPoint) {
+          this.va *= -1.12;
         }
         this.x += Math.sin(this.angle) * this.curve;
         this.y += Math.cos(this.angle) * this.curve;
@@ -58,6 +61,12 @@ window.addEventListener("load", function () {
         this.history.shift();
       }
     }
+    setBreakValue(newBreakValue) {
+      this.breakPoint = this.lifeSpan * newBreakValue;
+      this.draw(ctx);
+      this.update();
+  
+    }
     reset() {
       this.x = Math.floor(Math.random() * canvas.width);
       this.y = Math.floor(Math.random() * canvas.height);
@@ -68,6 +77,7 @@ window.addEventListener("load", function () {
       this.va = Math.random() * 0.5 - 0.25;
     }
   }
+
   for (let i = 0; i < numberOfLines; i++) {
     linesArray.push(new Line(canvas));
   }
@@ -82,6 +92,20 @@ window.addEventListener("load", function () {
     requestAnimationFrame(animate);
   }
   animate();
+
+  ratioSlider.addEventListener("change", function (e) {
+    sliderValue = e.target.value;
+     ratioLabel.innerText =  `Symmetry : Chaos ${sliderValue}`
+    linesArray.forEach((lineObject) => {
+      lineObject.setBreakValue(sliderValue);
+    });
+    
+    
+  });
+  // function handleSliderLabel(){
+  //   ratioLabel.innerText = 'test'
+
+  // }
 
   //load function end
 });
