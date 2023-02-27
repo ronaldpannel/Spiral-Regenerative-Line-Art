@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
   canvas.height = 900;
   let linesArray = [];
   let numberOfLines = 50;
-  let  sliderValue;
+  let sliderValue;
 
   class Line {
     constructor(canvas) {
@@ -65,7 +65,6 @@ window.addEventListener("load", function () {
       this.breakPoint = this.lifeSpan * newBreakValue;
       this.draw(ctx);
       this.update();
-  
     }
     reset() {
       this.x = Math.floor(Math.random() * canvas.width);
@@ -95,17 +94,11 @@ window.addEventListener("load", function () {
 
   ratioSlider.addEventListener("change", function (e) {
     sliderValue = e.target.value;
-     ratioLabel.innerText =  `Symmetry : Chaos ${sliderValue}`
+    ratioLabel.innerText = `Symmetry : Chaos ${sliderValue}`;
     linesArray.forEach((lineObject) => {
       lineObject.setBreakValue(sliderValue);
     });
-    
-    
   });
-  // function handleSliderLabel(){
-  //   ratioLabel.innerText = 'test'
-
-  // }
 
   //load function end
 });
